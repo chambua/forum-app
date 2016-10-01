@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController,ToastController } from 'ionic-angular';
 
+import {ForumPage} from '../forum/forum';
+
 /*
   Generated class for the HomePage page.
 
@@ -21,22 +23,22 @@ export class HomePage {
   }
 
   getForumGroups(){
-    this.setToasterMessage('Hello, ready to generate forum groups');
+    this.setToasterMessage('Hello, forum groups has been populated');
     this.forumGroups.push({
       id : 1,
       name : 'Business',
       forums : [
         {
           id : "form_1",
-          title : "title One",
-          poster : 'Chingalo',
+          title : "BUSINESS HAS TAKE NEW TURN IN THIRD WORLD COUNTRY?",
+          poster : 'Chambua',
           comments : [
             {
               comment : "It is just minor connection",
               commenter : "Joseph"
             },
             {
-              comment : "It is just minor connection",
+              comment : "Ofcoz this hii imekuwa ni topic kubwa sasa east africa……",
               commenter : "Leah"
             },
             {
@@ -51,8 +53,23 @@ export class HomePage {
         },
         {
           id : "form_2",
-          title : "title Two",
+          title : "GOVERNMENT OF TANZANIA HAS BEEN ABLE TO MANAGE TO STABILIZE NATIONAL CURRENCY?",
           poster : 'Rosemary',
+          comments : [
+            {
+              comment : "It is just minor connection",
+              commenter : "Joseph"
+            },
+            {
+              comment : "Nenda kasome makala iliyotolewa na BBC leo utapata majibu……..",
+              commenter : "Joseph"
+            }
+          ]
+        },
+        {
+          id : "form_3",
+          title : "What is deflation and inflation affect African continent.. I need comment please",
+          poster : 'Chingalo',
           comments : [
             {
               comment : "It is just minor connection",
@@ -82,6 +99,10 @@ export class HomePage {
             {
               comment : "It is done",
               commenter : "Joseph"
+            },
+            {
+              comment : "Nenda kasome makala iliyotolewa na BBC leo utapata majibu……..",
+              commenter : "Joseph"
             }
           ]
         },
@@ -108,11 +129,23 @@ export class HomePage {
       forums : [
         {
           id : "form_31",
-          title : "title One",
+          title : "IFM ,WORLD BANK has banned to give fund to Zimbabwe ? Due to Mugabe insults …weka comment yako..",
           poster : 'Leah',
           comments : [
             {
               comment : "It is just minor connection",
+              commenter : "Joseph"
+            },
+            {
+              comment : "It is done",
+              commenter : "Joseph"
+            },
+            {
+              comment : "Nenda kasome makala iliyotolewa na BBC leo utapata majibu……..",
+              commenter : "Joseph"
+            },
+            {
+              comment : "It is awesome",
               commenter : "Joseph"
             },
             {
@@ -133,6 +166,10 @@ export class HomePage {
             {
               comment : "It is done",
               commenter : "Joseph"
+            },
+            {
+              comment : "It is done",
+              commenter : "Joseph"
             }
           ]
         }
@@ -144,8 +181,11 @@ export class HomePage {
 
 
   goToForum(forum,forumGroupName){
-    alert(forumGroupName);
-    alert(JSON.stringify(forum));
+    let parameter = {
+      forumGroupName : forumGroupName,
+      forum : forum
+    };
+    this.navCtrl.push(ForumPage,parameter);
   }
   showSegment(currentGroupId){
     this.currentForumGroup = currentGroupId;

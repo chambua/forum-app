@@ -19,18 +19,21 @@
     <ion-row >
       <ion-col width-100 style="background-color:#ffffff;">
 
-        <ion-list *ngIf="!loadingData">
+        <ion-list *ngIf="!loadingData" >
 
           <ion-item>
-            <ion-input [(ngModel)]="data.serverUrl" type="url" placeholder="Enter server URL"></ion-input>
+            <ion-label floating>Server URL</ion-label>
+            <ion-input [(ngModel)]="data.serverUrl" type="url" ></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-input [(ngModel)]="data.username" type="text" placeholder="Enter username"></ion-input>
+            <ion-label floating>Username</ion-label>
+            <ion-input [(ngModel)]="data.username" type="text" ></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-input [(ngModel)]="data.password" type="password" placeholder="Enter password"></ion-input>
+            <ion-label floating>Password</ion-label>
+            <ion-input [(ngModel)]="data.password" type="password" ></ion-input>
           </ion-item>
 
         </ion-list>
@@ -55,8 +58,19 @@
         <button (click)="loginToServer()" full>
           Login
         </button>
+        <p class="linkParagraph" (click)="forgetPassword()">
+          Forgot your login credentials? Get in signing in
+        </p>
       </ion-col>
     </ion-row>
+
+    <ion-row *ngIf="!loadingData" >
+      <ion-col width-100>
+      <button (click)="signUp()" full>
+        Sign up
+      </button>
+        </ion-col>
+      </ion-row>
   </ion-grid>
 
 </ion-content>

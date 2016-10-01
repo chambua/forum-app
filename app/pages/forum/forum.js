@@ -9,55 +9,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var ionic_angular_1 = require('ionic-angular');
-var home_1 = require("../home/home");
 /*
-  Generated class for the LoginPage page.
+  Generated class for the ForumPage page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
-var LoginPage = (function () {
-    function LoginPage(navCtrl, toastCtrl) {
+var ForumPage = (function () {
+    function ForumPage(navCtrl, params, toastCtrl) {
         this.navCtrl = navCtrl;
+        this.params = params;
         this.toastCtrl = toastCtrl;
-        this.data = {};
-        this.loadingMessages = [];
-        this.loadingData = false;
-        this.data.setUpTitle = "Forum App";
-        this.data.setUpShortDescription = "Easiest way to get help";
+        this.getForumData();
     }
-    LoginPage.prototype.loginToServer = function () {
-        this.navCtrl.setRoot(home_1.HomePage);
+    ForumPage.prototype.getForumData = function () {
+        this.forumGroupName = this.params.get('forumGroupName');
+        this.forum = this.params.get('forum');
     };
-    LoginPage.prototype.signUp = function () {
-        this.setToasterMessage('Sign up for new account coming soon');
-    };
-    LoginPage.prototype.forgetPassword = function () {
-        this.setToasterMessage('forget password coming soon');
-    };
-    LoginPage.prototype.setLoadingMessages = function (message) {
-        this.loadingMessages.push(message);
-    };
-    LoginPage.prototype.setToasterMessage = function (message) {
+    ForumPage.prototype.setToasterMessage = function (message) {
         var toast = this.toastCtrl.create({
             message: message,
             duration: 4000
         });
         toast.present();
     };
-    LoginPage.prototype.setStickToasterMessage = function (message) {
+    ForumPage.prototype.setStickToasterMessage = function (message) {
         var toast = this.toastCtrl.create({
             message: message,
             showCloseButton: true
         });
         toast.present();
     };
-    LoginPage = __decorate([
+    ForumPage = __decorate([
         core_1.Component({
-            templateUrl: 'build/pages/login/login.html',
+            templateUrl: 'build/pages/forum/forum.html',
         }), 
-        __metadata('design:paramtypes', [ionic_angular_1.NavController, ionic_angular_1.ToastController])
-    ], LoginPage);
-    return LoginPage;
+        __metadata('design:paramtypes', [ionic_angular_1.NavController, ionic_angular_1.NavParams, ionic_angular_1.ToastController])
+    ], ForumPage);
+    return ForumPage;
 })();
-exports.LoginPage = LoginPage;
+exports.ForumPage = ForumPage;

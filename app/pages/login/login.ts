@@ -30,6 +30,14 @@ export class LoginPage {
     this.navCtrl.setRoot(HomePage);
   }
 
+  signUp(){
+    this.setToasterMessage('Sign up for new account coming soon');
+  }
+
+  forgetPassword(){
+    this.setToasterMessage('forget password coming soon');
+  }
+
   setLoadingMessages(message){
     this.loadingMessages.push(message);
   }

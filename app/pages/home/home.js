@@ -186,7 +186,7 @@ var HomePage = (function () {
         this.navCtrl.push(forum_1.ForumPage, parameter);
     };
     HomePage.prototype.showSegment = function (currentGroupId) {
-        this.currentForumGroup = currentGroupId;
+        this.currentForumGroup = "" + currentGroupId;
     };
     HomePage.prototype.setToasterMessage = function (message) {
         var toast = this.toastCtrl.create({

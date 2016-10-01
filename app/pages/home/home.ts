@@ -188,7 +188,7 @@ export class HomePage {
     this.navCtrl.push(ForumPage,parameter);
   }
   showSegment(currentGroupId){
-    this.currentForumGroup = currentGroupId;
+    this.currentForumGroup = ""+currentGroupId;
   }
 
 

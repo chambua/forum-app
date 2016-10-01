@@ -15,7 +15,7 @@
 </ion-header>
 
 
-<ion-content padding class="home">
+<ion-content class="home">
 
   <ion-segment [(ngModel)]="currentForumGroup">
     <ion-segment-button *ngFor="let forumGroup of forumGroups" (click)="showSegment(forumGroup.id)" value="{{ forumGroup.id }}">
@@ -34,7 +34,7 @@
         </ion-row>
       </ion-grid>
 
-      <ion-card *ngFor="let forum of forumGroup.forums">
+      <ion-card *ngFor="let forum of forumGroup.forums" (click)="goToForum(forum,forumGroup.name)">
         <ion-card-content>
           <p class="forumTitle">{{ forum.title}}</p>
         </ion-card-content>
@@ -46,7 +46,7 @@
             </ion-note>
           </ion-col>
           <ion-col>
-            <button primary clear small (click)="goToForum(forum,forumGroup.name)">
+            <button primary clear small >
               <ion-icon name="text"></ion-icon>
               <div>{{forum.comments.length}} Comments</div>
             </button>

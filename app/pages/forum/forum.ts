@@ -14,6 +14,7 @@ export class ForumPage {
 
   private forumGroupName : string;
   private forum : any;
+  private comment : string;
 
   constructor(private navCtrl: NavController,private params: NavParams,private toastCtrl: ToastController) {
     this.getForumData();
@@ -22,6 +23,17 @@ export class ForumPage {
   getForumData(){
     this.forumGroupName = this.params.get('forumGroupName');
     this.forum = this.params.get('forum');
+  }
+
+  commentOnForum(){
+    let comment = this.comment.trim();
+    if(comment){
+      this.forum.comments.push({
+        comment : comment,
+        commenter : 'commenter'
+      });
+    }
+    this.comment = "";
   }
 
   setToasterMessage(message){

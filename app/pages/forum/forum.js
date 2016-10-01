@@ -26,6 +26,16 @@ var ForumPage = (function () {
         this.forumGroupName = this.params.get('forumGroupName');
         this.forum = this.params.get('forum');
     };
+    ForumPage.prototype.commentOnForum = function () {
+        var comment = this.comment.trim();
+        if (comment) {
+            this.forum.comments.push({
+                comment: comment,
+                commenter: 'commenter'
+            });
+        }
+        this.comment = "";
+    };
     ForumPage.prototype.setToasterMessage = function (message) {
         var toast = this.toastCtrl.create({
             message: message,

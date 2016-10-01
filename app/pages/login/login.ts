@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController,ToastController } from 'ionic-angular';
 
+
+import {HomePage} from "../home/home";
+
 /*
   Generated class for the LoginPage page.
 
@@ -24,7 +27,7 @@ export class LoginPage {
 
 
   loginToServer(){
-    this.setToasterMessage('coming soon');
+    this.navCtrl.setRoot(HomePage);
   }
 
   setLoadingMessages(message){

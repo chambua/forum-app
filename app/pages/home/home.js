@@ -24,7 +24,6 @@ var HomePage = (function () {
         this.getForumGroups();
     }
     HomePage.prototype.getForumGroups = function () {
-        this.setToasterMessage('Hello, forum groups has been populated');
         this.forumGroups.push({
             id: 1,
             name: 'Business',

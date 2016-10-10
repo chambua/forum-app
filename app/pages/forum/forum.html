@@ -32,17 +32,24 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-grid>
+  <ion-grid >
+    <ion-row>
+        <ion-col width="100">
+          <ion-item>
+            <ion-label floating>Comment</ion-label>
+            <ion-textarea [(ngModel)]="comment">></ion-textarea>
+          </ion-item>
+        </ion-col>
+    </ion-row>
     <ion-row>
       <ion-col width="100">
-        <ion-textarea placeholder="Enter comment" [(ngModel)]="comment"></ion-textarea>
-      </ion-col>
-      <ion-col >
-        <button ion-button icon-only (click)="commentOnForum()">
+        <button ion-button icon-only full (click)="commentOnForum()">
+          Comment
           <ion-icon name="send"></ion-icon>
         </button>
       </ion-col>
     </ion-row>
   </ion-grid>
+
 
 </ion-content>

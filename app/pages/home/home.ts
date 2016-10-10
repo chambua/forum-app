@@ -23,7 +23,6 @@ export class HomePage {
   }
 
   getForumGroups(){
-    this.setToasterMessage('Hello, forum groups has been populated');
     this.forumGroups.push({
       id : 1,
       name : 'Business',

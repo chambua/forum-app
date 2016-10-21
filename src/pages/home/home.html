@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-navbar>
+    <button menuToggle clear>
+      <ion-icon name="menu" ></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="home">
+
+  <ion-segment [(ngModel)]="currentForumGroup">
+    <ion-segment-button *ngFor="let forumGroup of forumGroups" (click)="showSegment(forumGroup.id)" value="{{ forumGroup.id }}">
+      {{forumGroup.name}}
+    </ion-segment-button>
+  </ion-segment>
+
+
+  <div *ngFor="let forumGroup of forumGroups">
+    <div *ngIf="currentForumGroup == forumGroup.id">
+      <ion-grid>
+        <ion-row>
+          <ion-col width="100">
+            {{ forumGroup.name }}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-card *ngFor="let forum of forumGroup.forums" (click)="goToForum(forum,forumGroup.name)">
+        <ion-card-content>
+          <p class="forumTitle">{{ forum.title}}</p>
+        </ion-card-content>
+
+        <ion-row>
+          <ion-col >
+            <ion-note>
+              &nbsp;&nbsp;{{ forum.poster }}
+            </ion-note>
+          </ion-col>
+          <ion-col>
+            <button primary clear small ion-button >
+              <ion-icon name="text"></ion-icon>
+              <div>&nbsp;&nbsp;{{forum.comments.length}} Comments</div>
+            </button>
+          </ion-col>
+        </ion-row>
+
+      </ion-card>
+    </div>
+  </div>
+
+
+
+</ion-content>

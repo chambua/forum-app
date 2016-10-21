@@ -1,0 +1,49 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ forumGroupName }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="forum">
+
+  <ion-card>
+    <ion-card-content>
+      <h4>{{ forum.title}}</h4>
+      <p>Posted by: <span class="forumPoster">{{ forum.poster }} </span>  ( 09 : 24 ) </p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="commentsList">
+    <ion-card-content>
+      <div *ngFor="let forumComment of forum.comments">
+        <p class="commenter">{{forumComment.commenter }}</p>
+        <p class="comment">{{forumComment.comment }}</p>
+        <hr>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-grid >
+    <ion-row>
+      <ion-col width="100">
+        <ion-item>
+          <ion-label floating>Comment</ion-label>
+          <ion-textarea [(ngModel)]="comment">></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col width="100">
+        <button ion-button icon-only full (click)="commentOnForum()">
+          Comment
+          <ion-icon name="send"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>

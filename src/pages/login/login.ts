@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController,ToastController } from 'ionic-angular';
 import {Home} from "../home/home";
+import {User} from "../../providers/user";
 
 /*
   Generated class for the Login page.
@@ -10,7 +11,8 @@ import {Home} from "../home/home";
 */
 @Component({
   selector: 'page-login',
-  templateUrl: 'login.html'
+  templateUrl: 'login.html',
+  providers : [User]
 })
 export class Login {
 
@@ -22,7 +24,7 @@ export class Login {
   public loadingData: boolean;
   public loadingMessages : any = [];
 
-  constructor(private navCtrl: NavController,private toastCtrl: ToastController) {
+  constructor(private navCtrl: NavController,private toastCtrl: ToastController,private user : User) {
     this.loadingData = false;
     this.data.setUpTitle = "Forum App";
     this.data.setUpShortDescription = "Easiest way to get help";
@@ -30,7 +32,13 @@ export class Login {
 
 
   loginToServer(){
-    this.navCtrl.setRoot(Home);
+    this.user.setCurrentUser({name:"joseph chingalo"}).then(()=>{
+      console.log('success set');
+      this.user.getCurrentUser().then((user)=>{
+        console.log(user);
+      });
+    });
+    //this.navCtrl.setRoot(Home);
   }
 
   signUp(){

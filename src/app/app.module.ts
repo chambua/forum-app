@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 import { MyApp } from './app.component';
 import { Login } from '../pages/login/login';
 import { Home} from "../pages/home/home";
@@ -28,6 +29,6 @@ import {Forum} from "../pages/forum/forum";
     Account,
     Forum
   ],
-  providers: []
+  providers: [Storage]
 })
 export class AppModule {}

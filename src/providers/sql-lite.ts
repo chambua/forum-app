@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { SQLite} from 'ionic-native';
 import 'rxjs/add/operator/map';
 
 /*
@@ -10,9 +10,18 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class SqlLite {
+  private dataBaseStructure: any= {
+    dataElementGroupSets : {
+      columns : [
+        {value: 'id', type: 'TEXT'},
+        {value: 'description',type:'LONGTEXT'}
+      ],
 
-  constructor(public http: Http) {
-    console.log('Hello SqlLite Provider');
+    }
+  };
+
+  constructor() {
   }
+
 
 }

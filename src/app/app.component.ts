@@ -15,8 +15,8 @@ import { Account } from "../pages/account/account";
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  private rootPage: any;
-  private pages: Array<{title: string, component: any,iconName : string}>;
+  public rootPage: any;
+  public pages: Array<{title: string, component: any,iconName : string}>;
 
   constructor(private platform: Platform) {
     this.rootPage = Login;

@@ -13,9 +13,9 @@ import { NavController,ToastController,NavParams } from 'ionic-angular';
 })
 export class Forum {
 
-  private forumGroupName : string;
-  private forum : any;
-  private comment : string;
+  public forumGroupName : string;
+  public forum : any;
+  public comment : string;
 
   constructor(private navCtrl: NavController,private params: NavParams,private toastCtrl: ToastController) {
     this.getForumData();

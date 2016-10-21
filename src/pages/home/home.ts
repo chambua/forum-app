@@ -15,8 +15,8 @@ import {Forum} from '../forum/forum';
 })
 export class Home {
 
-  private forumGroups : any = [];
-  private currentForumGroup : string;
+  public forumGroups : any = [];
+  public currentForumGroup : string;
 
 
   constructor(private navCtrl: NavController,private toastCtrl: ToastController) {
@@ -112,7 +112,7 @@ export class Home {
         },
         {
           id : "form_22",
-          title : "A number of factors – the ubiquity of information technology; the social and policy questions its disruptions raise; and the heterogeneity of what an IT company is – mean that the ‘industry agenda’ for IT is not a simple affair. Simultaneously, the same ubiquity and potential for driving social and economic innovation, growth and inclusiveness means that the potential for catalyzing impact could hardly be greater",
+          title : "A number of factors – the ubiquity of information technology; the social and policy questions its disruptions rais.",
           poster : 'Leah',
           comments : [
             {
@@ -160,7 +160,7 @@ export class Home {
         },
         {
           id : "form_32",
-          title : "title two",
+          title : "Do you support the legalization of same sex marriage?",
           poster : 'Leah',
           comments : [
             {

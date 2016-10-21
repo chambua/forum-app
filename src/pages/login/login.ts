@@ -18,10 +18,10 @@ export class Login {
     console.log('Hello Login Page');
   }
 
-  private data : any = {};
-  private loadingData: boolean;
-  private loadingMessages : any = [];
-//,private user: User
+  public data : any = {};
+  public loadingData: boolean;
+  public loadingMessages : any = [];
+
   constructor(private navCtrl: NavController,private toastCtrl: ToastController) {
     this.loadingData = false;
     this.data.setUpTitle = "Forum App";

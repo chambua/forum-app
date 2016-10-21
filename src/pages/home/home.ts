@@ -24,7 +24,7 @@ export class Home {
   }
 
   ionViewDidLoad() {
-    console.log('Hello Home Page');
+    //console.log('Hello Home Page');
   }
 
   getForumGroups(){

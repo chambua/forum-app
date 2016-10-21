@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
 
 /*
   Generated class for the ContactAdmin page.
@@ -13,10 +12,21 @@ import { NavController } from 'ionic-angular';
 })
 export class ContactAdmin {
 
-  constructor(public navCtrl: NavController) {}
+  public contacts : any;
+  constructor() {
+    this.setContacts();
+  }
+
+  setContacts(){
+    this.contacts = [
+      {key : "Name",value : "Chambua"},
+      {key : "E-mail",value : "intelsoftafrica@info.co.tz"},
+      {key : "Mobile Number",value : "+255 717 873 646"}
+    ];
+  }
 
   ionViewDidLoad() {
-    console.log('Hello ContactAdmin Page');
+    //console.log('Hello ContactAdmin Page');
   }
 
 }

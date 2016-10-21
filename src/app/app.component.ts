@@ -6,11 +6,12 @@ import { Login } from '../pages/login/login';
 import { Home} from "../pages/home/home";
 import { ContactAdmin } from "../pages/contact-admin/contact-admin";
 import { Account } from "../pages/account/account";
-
+import {User} from "../providers/user";
 
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
+  providers : [User]
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
@@ -18,7 +19,7 @@ export class MyApp {
   public rootPage: any;
   public pages: Array<{title: string, component: any,iconName : string}>;
 
-  constructor(private platform: Platform) {
+  constructor(private platform: Platform,private user: User) {
     this.rootPage = Login;
     this.initializeApp();
     this.generatePages();
@@ -40,19 +41,17 @@ export class MyApp {
     });
   }
 
-
   openPage(page) {
     this.nav.setRoot(page.component);
   }
 
   logOut(){
-    this.nav.setRoot(Login);
-    //this.user.getCurrentUser().then(user=>{
-    //  user = JSON.parse(user);
-    //  user.isLogin = false;
-    //  this.user.setCurrentUser(user).then(user=>{
-    //
-    //  })
-    //})
+    this.user.getCurrentUser().then((user:any)=> {
+      user.isLogin = false;
+      this.user.setCurrentUser(user).then(()=>{
+        this.nav.setRoot(Login);
+      });
+    });
+
   }
 }

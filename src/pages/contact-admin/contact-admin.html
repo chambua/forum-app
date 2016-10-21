@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <button menuToggle clear>
+    <button menuToggle clear ion-button>
       <ion-icon name="menu" ></ion-icon>
     </button>
     <ion-title>Contact Admin</ion-title>
@@ -15,6 +15,18 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content class="contact-admin">
+  <ion-card>
+    <img src="assets/img/companyLogo.jpg"/>
+    <ion-card-content>
+      <div *ngFor="let contact of contacts">
+        <h2>
+          {{ contact.key }}
+        </h2>
+        <p>{{ contact.value }}</p>
+      </div>
+
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

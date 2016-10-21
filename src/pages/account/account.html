@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <button menuToggle clear>
+    <button menuToggle clear ion-button>
       <ion-icon name="menu" ></ion-icon>
     </button>
     <ion-title>My Account</ion-title>
@@ -17,6 +17,23 @@
 
 
 <ion-content class="account">
+  <ion-grid>
+    <ion-row>
+      <ion-col width-100>
+        <ion-item-divider light>
+          User information
+        </ion-item-divider>
+        <ion-list >
+          <div *ngFor="let userAccountDetail of userAccountDetails">
+            <ion-item text-wrap>
+              <h3>{{ userAccountDetail.label }}</h3>
+              <p>{{ userAccountDetail.value }}</p>
+            </ion-item>
+          </div>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>
 

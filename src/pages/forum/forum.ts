@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController,ToastController,NavParams } from 'ionic-angular';
+import {User} from "../../providers/user";
 
 /*
   Generated class for the Forum page.
@@ -9,20 +10,31 @@ import { NavController,ToastController,NavParams } from 'ionic-angular';
 */
 @Component({
   selector: 'page-forum',
-  templateUrl: 'forum.html'
+  templateUrl: 'forum.html',
+  providers : [User]
 })
 export class Forum {
 
   public forumGroupName : string;
   public forum : any;
   public comment : string;
+  public currentUser : any;
 
-  constructor(private navCtrl: NavController,private params: NavParams,private toastCtrl: ToastController) {
+  constructor(private navCtrl: NavController,private params: NavParams,private toastCtrl: ToastController,private user : User) {
     this.getForumData();
+    this.setCurrentUser();
   }
 
   ionViewDidLoad() {
-    console.log('Hello Forum Page');
+    //console.log('Hello Forum Page');
+  }
+
+  setCurrentUser(){
+    this.user.getCurrentUser().then((user:any)=> {
+      if (user.username) {
+        this.currentUser = user;
+      }
+    });
   }
 
   getForumData(){
@@ -36,7 +48,7 @@ export class Forum {
     if(comment){
       this.forum.comments.push({
         comment : comment,
-        commenter : 'commenter'
+        commenter : this.currentUser.fullName
       });
     }
     this.comment = "";

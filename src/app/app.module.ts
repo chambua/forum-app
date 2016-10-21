@@ -7,6 +7,7 @@ import { Home} from "../pages/home/home";
 import { ContactAdmin } from "../pages/contact-admin/contact-admin";
 import { Account } from "../pages/account/account";
 import {Forum} from "../pages/forum/forum";
+import {SignUp} from "../pages/sign-up/sign-up";
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import {Forum} from "../pages/forum/forum";
     Home,
     ContactAdmin,
     Account,
-    Forum
+    Forum,
+    SignUp
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -27,7 +29,8 @@ import {Forum} from "../pages/forum/forum";
     Home,
     ContactAdmin,
     Account,
-    Forum
+    Forum,
+    SignUp
   ],
   providers: [Storage]
 })

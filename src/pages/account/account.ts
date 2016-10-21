@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import {User} from "../../providers/user";
 
 /*
   Generated class for the Account page.
@@ -9,14 +10,48 @@ import { NavController } from 'ionic-angular';
 */
 @Component({
   selector: 'page-account',
-  templateUrl: 'account.html'
+  templateUrl: 'account.html',
+  providers : [User]
 })
 export class Account {
 
-  constructor(public navCtrl: NavController) {}
+  public currentUser:any;
+  public keyTransformerMapper : any;
+  public userAccountDetails : any;
+
+  constructor(public navCtrl: NavController,private user: User) {
+    this.setKeyTransformerMapper();
+    this.user.getCurrentUser().then((user:any)=> {
+      if (user.username) {
+        this.currentUser = user;
+        this.userAccountDetails = [];
+        this.setUserAccountDetails();
+      }
+    });
+  }
+
+  setKeyTransformerMapper(){
+    this.keyTransformerMapper = {
+      "fullName":"Full Name",
+      "username":"Username",
+      "email":"E-mail",
+      "mobileNumber":"Mobile Number",
+    }
+  }
+
+  setUserAccountDetails(){
+    for(let key in this.currentUser){
+      if(this.keyTransformerMapper[key]){
+        this.userAccountDetails.push({
+          label : this.keyTransformerMapper[key],
+          value : this.currentUser[key]
+        });
+      }
+    }
+  }
 
   ionViewDidLoad() {
-    console.log('Hello Account Page');
+    //console.log('Hello Account Page');
   }
 
 }

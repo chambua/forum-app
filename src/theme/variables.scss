@@ -71,6 +71,7 @@ $colors: (
 $ionicons-font-path: "../assets/fonts";
 @import "ionicons";
 
+@import "../pages/sign-up/sign-up.scss";
 @import "../pages/login/login.scss";
 @import "../pages/home/home.scss";
 

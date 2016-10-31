@@ -15,7 +15,7 @@ export class HttpClient {
   public baseUrl :string;
 
   constructor(public http: Http) {
-    this.baseUrl = "http://10.42.0.1/forum/index.php";
+    this.baseUrl = "http://10.0.0.36/forum/index.php";
     //console.log('Hello HttpClient Provider');
   }
   get(url):Observable<Response>{

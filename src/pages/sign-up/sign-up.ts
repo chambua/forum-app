@@ -3,6 +3,7 @@ import { NavController ,ToastController} from 'ionic-angular';
 import {User} from "../../providers/user";
 import {Home} from "../home/home";
 import {HttpClient} from "../../providers/http-client";
+import {Categories} from "../../providers/categories";
 
 /*
  Generated class for the SignUp page.
@@ -13,7 +14,7 @@ import {HttpClient} from "../../providers/http-client";
 @Component({
   selector: 'page-sign-up',
   templateUrl: 'sign-up.html',
-  providers : [User,HttpClient]
+  providers : [User,HttpClient,Categories]
 })
 export class SignUp {
 
@@ -24,7 +25,7 @@ export class SignUp {
   public selectedCategories : any;
   public categories : any;
 
-  constructor(public navCtrl:NavController,private toastCtrl: ToastController,private user : User,private httpClient:HttpClient) {
+  constructor(private Categories : Categories,public navCtrl:NavController,private toastCtrl: ToastController,private user : User,private httpClient:HttpClient) {
     this.loadingData = false;
     this.mandatoryFields = [
       {name : "full name",key : "fullName"},
@@ -56,11 +57,14 @@ export class SignUp {
   registerAccount() {
     if(this.isAllMandatoryFieldsEntered() && this.selectedCategories.length > 0){
       let url = "/register";
+      this.loadingData = true;
+      this.loadingMessages = [];
+      this.setLoadingMessages('Register account');
       this.httpClient.post(url,this.data).subscribe((response)=>{
         response = response.json();
         this.setUserData(response);
       },error=>{
-        alert(JSON.stringify(error));
+
         this.setToasterMessage("Fail to register account");
       });
     }
@@ -70,11 +74,14 @@ export class SignUp {
     this.loadingData = false;
     this.setToasterMessage(response.message);
     if(response.status == 1){
-      //todo save categories  to database
-      this.data.categories = this.getAllCategories();
-      this.data.isLogin = true;
-      this.user.setCurrentUser(this.data).then(()=>{
-        this.navCtrl.setRoot(Home);
+      this.setLoadingMessages('Subscribe categories');
+      this.Categories.addUserCategories(this.selectedCategories,response.user_id).then(()=>{
+        this.data.categories = this.getAllCategories();
+        this.data.isLogin = true;
+        this.user.setCurrentUser(this.data).then(()=>{
+          this.navCtrl.setRoot(Home);
+          this.loadingData = false;
+        });
       });
     }
   }

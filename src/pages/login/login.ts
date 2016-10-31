@@ -4,6 +4,7 @@ import {Home} from "../home/home";
 import {User} from "../../providers/user";
 import {SignUp} from "../sign-up/sign-up";
 import {HttpClient} from "../../providers/http-client";
+import {Categories} from "../../providers/categories";
 
 /*
  Generated class for the Login page.
@@ -14,7 +15,7 @@ import {HttpClient} from "../../providers/http-client";
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
-  providers: [User,HttpClient]
+  providers: [User,HttpClient,Categories]
 })
 export class Login {
 
@@ -24,7 +25,7 @@ export class Login {
   public currentUser:any;
   public mandatoryFields:any;
 
-  constructor(private navCtrl:NavController, private toastCtrl:ToastController, private user:User,private httpClient : HttpClient) {
+  constructor(private categories : Categories,private navCtrl:NavController, private toastCtrl:ToastController, private user:User,private httpClient : HttpClient) {
     this.loadingData = false;
     this.data.setUpTitle = "University Intellectual Network";
     this.data.setUpShortDescription = "Easiest way to get help";
@@ -65,10 +66,17 @@ export class Login {
         if(response){
           this.currentUser = response;
           this.currentUser.isLogin = true;
-          this.user.setCurrentUser(this.currentUser).then(()=> {
+          this.setLoadingMessages('Loading user subscriptions');
+          this.categories.getUserCategories(this.currentUser).then((categories:any)=>{
+            this.currentUser.categories = categories;
+            this.user.setCurrentUser(this.currentUser).then(()=> {
+              this.loadingData = false;
+              this.navCtrl.setRoot(Home);
+            })
+          },error=>{
             this.loadingData = false;
-            this.navCtrl.setRoot(Home);
-          })
+            this.setToasterMessage('Fail to get user subscriptions');
+          });
         }else{
           this.loadingData = false;
           this.setToasterMessage('Please check your username and password');

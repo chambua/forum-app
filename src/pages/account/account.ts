@@ -33,6 +33,7 @@ export class Account {
   setKeyTransformerMapper(){
     this.keyTransformerMapper = {
       "fullName":"Full Name",
+      "last_name":"Full Name",
       "username":"Username",
       "email":"E-mail",
       "mobileNumber":"Mobile Number",

@@ -12,21 +12,21 @@ import { Observable } from 'rxjs/Rx';
 @Injectable()
 export class HttpClient {
 
+  public baseUrl :string;
+
   constructor(public http: Http) {
-    console.log('Hello HttpClient Provider');
+    this.baseUrl = "http://10.42.0.1/forum/index.php";
+    //console.log('Hello HttpClient Provider');
   }
-  get(url,user):Observable<Response>{
-    let headers = new Headers();
-    headers.append('Authorization', 'Basic ' +
-      btoa(user.username + ':' + user.password));
-    return this.http.get(user.serverUrl + url, {headers: headers});
+  get(url):Observable<Response>{
+    return this.http.get(this.baseUrl + url);
   }
 
-  post(url, data, user):Observable<Response> {
-    let headers = new Headers();
-    headers.append('Authorization', 'Basic ' +
-      btoa(user.username + ':' + user.password));
-    return this.http.post(user.serverUrl + url, data, {headers: headers});
+  post(url, data ):Observable<Response> {
+    let headers = new Headers({
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8;'
+    });
+    return this.http.post(this.baseUrl + url, {data:data}, {headers:headers});
   }
 
 }

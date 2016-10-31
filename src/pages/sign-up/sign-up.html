@@ -18,6 +18,23 @@
 
 <ion-content class="page-sign-up">
   <ion-grid>
+    <ion-row>
+      <ion-col width-100 >
+        <div *ngIf="loadingData">
+          <ion-list>
+            <ion-item *ngFor="let message of loadingMessages; let currentIndex = index">
+              {{ message }}
+              <ion-icon *ngIf="(currentIndex + 1) < loadingMessages.length" name="done-all" item-right></ion-icon>
+              <div style="text-align: center" item-right *ngIf="(currentIndex + 1) >= loadingMessages.length">
+                <ion-spinner name="crescent"></ion-spinner>
+              </div>
+            </ion-item>
+          </ion-list>
+        </div>
+      </ion-col>
+    </ion-row>
+
+
     <ion-row *ngIf="!loadingData" >
       <ion-col width-100 style="background-color:#ffffff;">
 
@@ -40,14 +57,23 @@
           <ion-label floating>E-mail</ion-label>
           <ion-input [(ngModel)]="data.email" type="email" ></ion-input>
         </ion-item>
-        
+
         <ion-item>
           <ion-label floating>Mobile Number</ion-label>
           <ion-input [(ngModel)]="data.mobileNumber" type="text" ></ion-input>
         </ion-item>
+        <ion-item>
+          <ion-label>Categories</ion-label>
+          <ion-select [(ngModel)]="selectedCategories" multiple="true" cancelText="Cancel" okText="Save">
+            <div *ngFor="let category of categories">
+              <ion-option  value="{{category.cat_id }}">{{ category.cat_name}}</ion-option>
+            </div>
+          </ion-select>
+        </ion-item>
       </ion-col>
+
     </ion-row>
-    
+
     <ion-row *ngIf="!loadingData" >
       <ion-col width-100>
         <button (click)="registerAccount()" ion-button full>

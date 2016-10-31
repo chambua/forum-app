@@ -3,6 +3,7 @@ import { NavController,ToastController } from 'ionic-angular';
 import {Home} from "../home/home";
 import {User} from "../../providers/user";
 import {SignUp} from "../sign-up/sign-up";
+import {HttpClient} from "../../providers/http-client";
 
 /*
  Generated class for the Login page.
@@ -13,7 +14,7 @@ import {SignUp} from "../sign-up/sign-up";
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
-  providers: [User]
+  providers: [User,HttpClient]
 })
 export class Login {
 
@@ -23,7 +24,7 @@ export class Login {
   public currentUser:any;
   public mandatoryFields:any;
 
-  constructor(private navCtrl:NavController, private toastCtrl:ToastController, private user:User) {
+  constructor(private navCtrl:NavController, private toastCtrl:ToastController, private user:User,private httpClient : HttpClient) {
     this.loadingData = false;
     this.data.setUpTitle = "University Intellectual Network";
     this.data.setUpShortDescription = "Easiest way to get help";
@@ -36,9 +37,11 @@ export class Login {
 
   setCurrentUser(){
     this.user.getCurrentUser().then((user:any)=> {
-      if (user.username) {
-        this.currentUser = user;
-        this.reAuthenticateUser();
+      if (user) {
+        if(user.username){
+          this.currentUser = user;
+          this.reAuthenticateUser();
+        }
       }else{
         this.currentUser = {};
       }
@@ -51,19 +54,30 @@ export class Login {
     }
   }
 
-  //@todo rechecking logic on online server
-  loginToServer() {
+ loginToServer() {
     if (this.isAllMandatoryFieldsEntered()) {
-      if(this.currentUser){
-        if (this.isUserAccountAvailable()) {
+      let url = "/authenticate";
+      this.loadingData = true;
+      this.loadingMessages = [];
+      this.setLoadingMessages('Please wait ...');
+      this.httpClient.post(url,this.data).subscribe(response=>{
+        response = response.json();
+        if(response){
+          this.currentUser = response;
           this.currentUser.isLogin = true;
           this.user.setCurrentUser(this.currentUser).then(()=> {
+            this.loadingData = false;
             this.navCtrl.setRoot(Home);
           })
+        }else{
+          this.loadingData = false;
+          this.setToasterMessage('Please check your username and password');
         }
-      }else{
-        this.setToasterMessage('Currently you have not registered, please sign up first');
-      }
+
+      },error=>{
+        this.loadingData = false;
+        this.setToasterMessage('Fail to connect to the server');
+      })
     }
   }
 

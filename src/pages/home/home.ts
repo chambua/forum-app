@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController,ToastController } from 'ionic-angular';
 
 import {Forum} from '../forum/forum';
+import {User} from "../../providers/user";
+import {HttpClient} from "../../providers/http-client";
 
 /*
   Generated class for the Home page.
@@ -11,18 +13,24 @@ import {Forum} from '../forum/forum';
 */
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
+  providers : [User,HttpClient]
 })
 export class Home {
+
+  public currentUser :any;
 
   public forumGroups : any = [];
   public currentForumGroup : string;
 
 
-  constructor(private navCtrl: NavController,private toastCtrl: ToastController) {
+  constructor(private user : User,private httpClient : HttpClient,private navCtrl: NavController,private toastCtrl: ToastController) {
+    this.user.getCurrentUser().then((user : any)=>{
+      this.currentUser = user;
+    });
     this.getForumGroups();
   }
-
+ 
   ionViewDidLoad() {
     //console.log('Hello Home Page');
   }

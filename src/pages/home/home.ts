@@ -27,166 +27,84 @@ export class Home {
   constructor(private user : User,private httpClient : HttpClient,private navCtrl: NavController,private toastCtrl: ToastController) {
     this.user.getCurrentUser().then((user : any)=>{
       this.currentUser = user;
+      this.getForumGroups();
     });
-    this.getForumGroups();
+
   }
- 
+
   ionViewDidLoad() {
     //console.log('Hello Home Page');
   }
 
   getForumGroups(){
-    this.forumGroups.push({
-      id : 1,
-      name : 'Business',
-      forums : [
+
+    let forum = [
+      {
+        id : "form_1",
+        title : "BUSINESS HAS TAKE NEW TURN IN THIRD WORLD COUNTRY?",
+        poster : 'Chambua',
+        comments : [
+          {
+            comment : "It is just minor connection",
+            commenter : "Joseph"
+          },
+          {
+            comment : "Ofcoz this hii imekuwa ni topic kubwa sasa east africa……",
+            commenter : "Leah"
+          },
+          {
+            comment : "It is just minor connection",
+            commenter : "Ester"
+          },
+          {
+            comment : "It is done",
+            commenter : "Joseph"
+          }
+        ]
+      },
+      {
+        id : "form_2",
+        title : "GOVERNMENT OF TANZANIA HAS BEEN ABLE TO MANAGE TO STABILIZE NATIONAL CURRENCY?",
+        poster : 'Rosemary',
+        comments : [
+          {
+            comment : "It is just minor connection",
+            commenter : "Joseph"
+          },
+          {
+            comment : "Nenda kasome makala iliyotolewa na BBC leo utapata majibu……..",
+            commenter : "Joseph"
+          }
+        ]
+      },
+      {
+        id : "form_3",
+        title : "What is deflation and inflation affect African continent.. I need comment please",
+        poster : 'Chingalo',
+        comments : [
+          {
+            comment : "It is just minor connection",
+            commenter : "Joseph"
+          },
+          {
+            comment : "It is done",
+            commenter : "Joseph"
+          }
+        ]
+      }
+    ];
+    this.forumGroups = [];
+    this.currentUser.categories.forEach((category:any)=>{
+      this.forumGroups.push(
         {
-          id : "form_1",
-          title : "BUSINESS HAS TAKE NEW TURN IN THIRD WORLD COUNTRY?",
-          poster : 'Chambua',
-          comments : [
-            {
-              comment : "It is just minor connection",
-              commenter : "Joseph"
-            },
-            {
-              comment : "Ofcoz this hii imekuwa ni topic kubwa sasa east africa……",
-              commenter : "Leah"
-            },
-            {
-              comment : "It is just minor connection",
-              commenter : "Ester"
-            },
-            {
-              comment : "It is done",
-              commenter : "Joseph"
-            }
-          ]
-        },
-        {
-          id : "form_2",
-          title : "GOVERNMENT OF TANZANIA HAS BEEN ABLE TO MANAGE TO STABILIZE NATIONAL CURRENCY?",
-          poster : 'Rosemary',
-          comments : [
-            {
-              comment : "It is just minor connection",
-              commenter : "Joseph"
-            },
-            {
-              comment : "Nenda kasome makala iliyotolewa na BBC leo utapata majibu……..",
-              commenter : "Joseph"
-            }
-          ]
-        },
-        {
-          id : "form_3",
-          title : "What is deflation and inflation affect African continent.. I need comment please",
-          poster : 'Chingalo',
-          comments : [
-            {
-              comment : "It is just minor connection",
-              commenter : "Joseph"
-            },
-            {
-              comment : "It is done",
-              commenter : "Joseph"
-            }
-          ]
+          id : category.cat_id,
+          name : category.cat_name,
+          forums : forum
         }
-      ]
+      )
     });
-    this.forumGroups.push({
-      id : 2,
-      name : 'Information Tech',
-      forums : [
-        {
-          id : "form_21",
-          title : "CPU and modern games: A guide to those building",
-          poster : 'Philibert',
-          comments : [
-            {
-              comment : "It is just minor connection",
-              commenter : "Joseph"
-            },
-            {
-              comment : "It is done",
-              commenter : "Joseph"
-            },
-            {
-              comment : "Nenda kasome makala iliyotolewa na BBC leo utapata majibu……..",
-              commenter : "Joseph"
-            }
-          ]
-        },
-        {
-          id : "form_22",
-          title : "A number of factors – the ubiquity of information technology; the social and policy questions its disruptions rais.",
-          poster : 'Leah',
-          comments : [
-            {
-              comment : "It is just minor connection",
-              commenter : "Joseph"
-            },
-            {
-              comment : "It is done",
-              commenter : "Joseph"
-            }
-          ]
-        }
-      ]
-    });
-    this.forumGroups.push({
-      id : 3,
-      name : 'Social',
-      forums : [
-        {
-          id : "form_31",
-          title : "IFM ,WORLD BANK has banned to give fund to Zimbabwe ? Due to Mugabe insults …weka comment yako..",
-          poster : 'Leah',
-          comments : [
-            {
-              comment : "It is just minor connection",
-              commenter : "Joseph"
-            },
-            {
-              comment : "It is done",
-              commenter : "Joseph"
-            },
-            {
-              comment : "Nenda kasome makala iliyotolewa na BBC leo utapata majibu……..",
-              commenter : "Joseph"
-            },
-            {
-              comment : "It is awesome",
-              commenter : "Joseph"
-            },
-            {
-              comment : "It is done",
-              commenter : "Joseph"
-            }
-          ]
-        },
-        {
-          id : "form_32",
-          title : "Do you support the legalization of same sex marriage?",
-          poster : 'Leah',
-          comments : [
-            {
-              comment : "It is just minor connection",
-              commenter : "Joseph"
-            },
-            {
-              comment : "It is done",
-              commenter : "Joseph"
-            },
-            {
-              comment : "It is done",
-              commenter : "Joseph"
-            }
-          ]
-        }
-      ]
-    });
+
+
 
     this.showSegment(this.forumGroups[0].id);
   }

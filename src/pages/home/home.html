@@ -10,10 +10,7 @@
 
 
 <ion-content class="home">
-
-  {{ currentUser|json }}
-  <hr>
-
+  
   <ion-segment [(ngModel)]="currentForumGroup">
     <ion-segment-button *ngFor="let forumGroup of forumGroups" (click)="showSegment(forumGroup.id)" value="{{ forumGroup.id }}">
       {{forumGroup.name}}

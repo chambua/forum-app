@@ -7,6 +7,8 @@ import { Home} from "../pages/home/home";
 import { ContactAdmin } from "../pages/contact-admin/contact-admin";
 import { Account } from "../pages/account/account";
 import {User} from "../providers/user";
+import {Doctor} from "../pages/doctor/doctor";
+import {Councelling} from "../pages/councelling/councelling";
 
 
 @Component({
@@ -29,6 +31,8 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: Home,iconName :"home" },
       { title: 'Contact Admin', component: ContactAdmin ,iconName :"call"},
+      { title: 'Get Counselling', component: Councelling,iconName :"bulb" },
+      { title: 'Get Doctor', component: Doctor,iconName :"contacts" },
       { title: 'My Account', component: Account, iconName :"contact"}
     ];
   }

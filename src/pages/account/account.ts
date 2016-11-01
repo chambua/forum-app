@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController,ToastController } from 'ionic-angular';
 import {User} from "../../providers/user";
 
 /*
@@ -18,8 +18,10 @@ export class Account {
   public currentUser:any;
   public keyTransformerMapper : any;
   public userAccountDetails : any;
+  public loadingData: boolean;
+  public loadingMessages : any = [];
 
-  constructor(public navCtrl: NavController,private user: User) {
+  constructor(public navCtrl: NavController,private user: User,private toastCtrl: ToastController) {
     this.setKeyTransformerMapper();
     this.user.getCurrentUser().then((user:any)=> {
       if (user.username) {
@@ -30,6 +32,10 @@ export class Account {
     });
   }
 
+  uploadCv(){
+    this.setToasterMessage('Coming soon!');
+  }
+
   setKeyTransformerMapper(){
     this.keyTransformerMapper = {
       "fullName":"Full Name",
@@ -37,6 +43,7 @@ export class Account {
       "username":"Username",
       "email":"E-mail",
       "mobileNumber":"Mobile Number",
+      "phone_number":"Mobile Number",
     }
   }
 
@@ -53,6 +60,26 @@ export class Account {
 
   ionViewDidLoad() {
     //console.log('Hello Account Page');
+  }
+
+  setLoadingMessages(message){
+    this.loadingMessages.push(message);
+  }
+
+  setToasterMessage(message){
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 4000
+    });
+    toast.present();
+  }
+
+  setStickToasterMessage(message){
+    let toast = this.toastCtrl.create({
+      message: message,
+      showCloseButton : true
+    });
+    toast.present();
   }
 
 }

@@ -13,7 +13,6 @@ import {Observable} from 'rxjs/Rx';
 export class Categories {
 
   constructor(private httpClient: HttpClient) {
-    console.log('Hello Categories Provider');
   }
 
   getAllCategories(){

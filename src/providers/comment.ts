@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
+import {HttpClient} from '../providers/http-client';
+
+import {Observable} from 'rxjs/Rx';
 
 /*
   Generated class for the Comment provider.
@@ -11,8 +12,36 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class Comment {
 
-  constructor(public http: Http) {
-    console.log('Hello Comment Provider');
+  constructor(public httpClient : HttpClient) {
+  }
+
+  //@todo add url for server
+  getAllComents(categoryEntityId){
+    let url = "" + "/"+categoryEntityId;
+    let self = this;
+    return new Promise(function(resolve, reject) {
+      return new Promise(function(resolve, reject) {
+        self.httpClient.get(url).subscribe(response=>{
+          resolve(response.json());
+        },error=>{
+          reject();
+        });
+      })
+    });
+  }
+
+  saveComment(data){
+    let url = "";
+    let self = this;
+    return new Promise(function(resolve, reject) {
+      return new Promise(function(resolve, reject) {
+        self.httpClient.post(url,data).subscribe(response=>{
+          resolve(response.json());
+        },error=>{
+          reject();
+        });
+      })
+    });
   }
 
 }

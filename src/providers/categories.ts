@@ -16,6 +16,19 @@ export class Categories {
     console.log('Hello Categories Provider');
   }
 
+  getAllCategories(){
+    let self = this;
+    let url = "/get-categories";
+    return new Promise(function(resolve, reject) {
+      self.httpClient.get(url).subscribe((response)=>{
+        response = response.json();
+        resolve(response);
+      },error=>{
+        reject();
+      });
+    })
+  }
+
   addUserCategories(selectedCategories,user_id){
     let self = this;
     let url = "/add-user-categories";

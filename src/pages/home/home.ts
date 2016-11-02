@@ -104,8 +104,6 @@ export class Home {
       )
     });
 
-
-
     this.showSegment(this.forumGroups[0].id);
   }
 

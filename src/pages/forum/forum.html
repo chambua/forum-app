@@ -19,7 +19,7 @@
   <ion-card class="commentsList">
     <ion-card-content>
       <div *ngFor="let forumComment of forum.comments">
-        <p class="commenter">{{forumComment.commenter }}</p>
+        <p class="commenter"><b>{{forumComment.commenter }}</b></p>
         <p class="comment">{{forumComment.comment }}</p>
         <hr>
       </div>

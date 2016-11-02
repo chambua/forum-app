@@ -30,17 +30,17 @@
 
       <ion-card *ngFor="let forum of forumGroup.forums" (click)="goToForum(forum,forumGroup.name)">
         <ion-card-content>
-          <p class="forumTitle">{{ forum.title}}</p>
+          <p class="forumTitle"><b>{{ forum.title}}</b></p>
         </ion-card-content>
 
         <ion-row>
           <ion-col >
-            <ion-note>
-              &nbsp;&nbsp;{{ forum.poster }}
-            </ion-note>
+            <button primary clear small ion-button >
+              <div>&nbsp;&nbsp;{{ forum.poster }}</div>
+            </button>
           </ion-col>
           <ion-col>
-            <button primary clear small ion-button >
+            <button light clear small ion-button >
               <ion-icon name="text"></ion-icon>
               <div>&nbsp;&nbsp;{{forum.comments.length}} Comments</div>
             </button>

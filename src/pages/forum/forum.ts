@@ -48,7 +48,7 @@ export class Forum {
     if(comment){
       this.forum.comments.push({
         comment : comment,
-        commenter : this.currentUser.fullName
+        commenter : this.currentUser.username
       });
     }
     this.comment = "";

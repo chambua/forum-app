@@ -40,12 +40,11 @@ export class SignUp {
     this.loadingData = true;
     this.loadingMessages = [];
     this.setLoadingMessages('Fetching categories from the server');
-    let url = "/get-categories";
-    this.httpClient.get(url).subscribe((response)=>{
-      response = response.json();
-      this.categories = response;
+    this.Categories.getAllCategories().then((categories : any)=>{
+      this.categories = categories;
       this.loadingData = false;
     },error=>{
+      this.loadingData = false;
       this.setToasterMessage("Fail to get categories from server");
     });
   }
@@ -64,7 +63,7 @@ export class SignUp {
         response = response.json();
         this.setUserData(response);
       },error=>{
-
+        this.loadingData = false;
         this.setToasterMessage("Fail to register account");
       });
     }
@@ -76,8 +75,8 @@ export class SignUp {
     if(response.status == 1){
       this.setLoadingMessages('Subscribe categories');
       this.Categories.addUserCategories(this.selectedCategories,response.user_id).then(()=>{
-        this.data.categories = this.getAllCategories();
         this.data.isLogin = true;
+        this.data.categories = this.getUserCategories();
         this.user.setCurrentUser(this.data).then(()=>{
           this.navCtrl.setRoot(Home);
           this.loadingData = false;

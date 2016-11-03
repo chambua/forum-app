@@ -32,7 +32,7 @@ export class CategoryEntity {
   }
 
   getCategoryEntitiesByCategoryIds(categoryIds){
-    let url = "";
+    let url = "/get-category-entities";
     let self = this;
     let data = {
       categoryIds : categoryIds

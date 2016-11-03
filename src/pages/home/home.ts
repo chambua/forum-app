@@ -4,6 +4,7 @@ import { NavController,ToastController } from 'ionic-angular';
 import {Forum} from '../forum/forum';
 import {User} from "../../providers/user";
 import {HttpClient} from "../../providers/http-client";
+import {CategoryEntity} from "../../providers/category-entity";
 
 /*
   Generated class for the Home page.
@@ -14,7 +15,7 @@ import {HttpClient} from "../../providers/http-client";
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  providers : [User,HttpClient]
+  providers : [User,HttpClient,CategoryEntity]
 })
 export class Home {
 
@@ -24,16 +25,29 @@ export class Home {
   public currentForumGroup : string;
 
 
-  constructor(private user : User,private httpClient : HttpClient,private navCtrl: NavController,private toastCtrl: ToastController) {
+  constructor(private categoryEntity:CategoryEntity,private user : User,private httpClient : HttpClient,private navCtrl: NavController,private toastCtrl: ToastController) {
     this.user.getCurrentUser().then((user : any)=>{
       this.currentUser = user;
       this.getForumGroups();
+      this.getCategoryEntities();
     });
 
   }
 
   ionViewDidLoad() {
     //console.log('Hello Home Page');
+  }
+
+  getCategoryEntities(){
+    var categoryIds = [];
+    this.currentUser.categories.forEach((category:any)=>{
+      categoryIds.push(category.cat_id);
+    });
+    this.categoryEntity.getCategoryEntitiesByCategoryIds(categoryIds).then((categoryEntities : any)=>{
+      alert("Success : " + JSON.stringify(categoryEntities));
+    },error=>{
+      alert('error : ' + JSON.stringify(error));
+    });
   }
 
   getForumGroups(){

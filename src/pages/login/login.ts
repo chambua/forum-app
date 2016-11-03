@@ -90,19 +90,6 @@ export class Login {
     }
   }
 
-
-  isUserAccountAvailable() {
-    let isUserAccountAvailable = true;
-    if (this.data.username != this.currentUser.username) {
-      this.setToasterMessage('Currently you have not registered, please sign up first');
-      return false;
-    }else if (this.data.password != this.currentUser.password) {
-      this.setStickToasterMessage('You have entered wrong password');
-      return false;
-    }
-    return isUserAccountAvailable;
-  }
-
   isAllMandatoryFieldsEntered() {
     let result = true;
     for (let mandatoryField of this.mandatoryFields) {

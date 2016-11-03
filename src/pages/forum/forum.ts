@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController,ToastController,NavParams } from 'ionic-angular';
+import { ToastController,NavParams } from 'ionic-angular';
 import {User} from "../../providers/user";
 
 /*
@@ -16,30 +16,34 @@ import {User} from "../../providers/user";
 export class Forum {
 
   public forumGroupName : string;
-  public forum : any;
+  public forum : any = {};
   public comment : string;
   public currentUser : any;
+  public loadingData:boolean;
+  public loadingMessages:any = [];
 
-  constructor(private navCtrl: NavController,private params: NavParams,private toastCtrl: ToastController,private user : User) {
-    this.getForumData();
-    this.setCurrentUser();
+  constructor(private params: NavParams,private toastCtrl: ToastController,private user : User) {
+    this.loadingData = false;
+    this.user.getCurrentUser().then((user : any)=>{
+      this.currentUser = user;
+      this.loadingData = false;
+      this.getForumData();
+    });
   }
 
   ionViewDidLoad() {
     //console.log('Hello Forum Page');
   }
 
-  setCurrentUser(){
-    this.user.getCurrentUser().then((user:any)=> {
-      if (user.username) {
-        this.currentUser = user;
-      }
-    });
-  }
-
   getForumData(){
+    //@todo loading comments from server
     this.forumGroupName = this.params.get('forumGroupName');
-    this.forum = this.params.get('forum');
+    this.forum = {};
+    this.forum["id"]= this.params.get('forumId');
+    this.forum["title"]=this.params.get('forumTitle');
+    this.forum["poster"] = this.params.get('forumPoster');
+    this.forum["postedDate"] = this.params.get('forumPostedDate');
+    this.forum["comments"] = [];
     this.comment = "";
   }
 
@@ -52,6 +56,10 @@ export class Forum {
       });
     }
     this.comment = "";
+  }
+
+  setLoadingMessages(message) {
+    this.loadingMessages.push(message);
   }
 
   setToasterMessage(message){

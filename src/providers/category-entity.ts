@@ -39,11 +39,22 @@ export class CategoryEntity {
     };
     return new Promise(function(resolve, reject) {
       self.httpClient.post(url,data).subscribe(response=>{
-        resolve(response.json());
+        resolve(self.getFormattedCategoryWithCategoryEntities(response.json()));
       },error=>{
         reject();
       });
     })
+  }
+
+  getFormattedCategoryWithCategoryEntities(categoryEntities){
+    let formattedCategoryWithCategoryEntities = {};
+    categoryEntities.forEach((categoryEntity:any)=>{
+      if(!formattedCategoryWithCategoryEntities[categoryEntity.cat_id]){
+        formattedCategoryWithCategoryEntities[categoryEntity.cat_id] = [];
+      }
+      formattedCategoryWithCategoryEntities[categoryEntity.cat_id].push(categoryEntity);
+    });
+    return formattedCategoryWithCategoryEntities;
   }
 
 }

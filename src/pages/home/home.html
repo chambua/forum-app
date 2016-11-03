@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <button menuToggle clear ion-button>
-      <ion-icon name="menu" ></ion-icon>
+      <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Home</ion-title>
   </ion-navbar>
@@ -11,44 +11,72 @@
 
 <ion-content class="home">
 
-  <ion-segment [(ngModel)]="currentForumGroup">
-    <ion-segment-button *ngFor="let forumGroup of forumGroups" (click)="showSegment(forumGroup.id)" value="{{ forumGroup.id }}">
-      {{forumGroup.name}}
-    </ion-segment-button>
-  </ion-segment>
+  <div *ngIf="loadingData">
+    <ion-list>
+      <ion-item *ngFor="let message of loadingMessages; let currentIndex = index">
+        {{ message }}
+        <ion-icon *ngIf="(currentIndex + 1) < loadingMessages.length" name="done-all" item-right></ion-icon>
+        <div style="text-align: center" item-right *ngIf="(currentIndex + 1) >= loadingMessages.length">
+          <ion-spinner name="crescent"></ion-spinner>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
 
+  <div *ngIf="!loadingData">
 
-  <div *ngFor="let forumGroup of forumGroups">
-    <div *ngIf="currentForumGroup == forumGroup.id">
-      <ion-grid>
-        <ion-row>
-          <ion-col width="100">
-            {{ forumGroup.name }}
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+    <ion-segment [(ngModel)]="currentForumGroup">
+      <ion-segment-button *ngFor="let forumGroup of forumGroups" (click)="showSegment(forumGroup.id)"
+                          value="{{ forumGroup.id }}">
+        {{forumGroup.name}}
+      </ion-segment-button>
+    </ion-segment>
 
-      <ion-card *ngFor="let forum of forumGroup.forums" (click)="goToForum(forum,forumGroup.name)">
-        <ion-card-content>
-          <p class="forumTitle"><b>{{ forum.title}}</b></p>
-        </ion-card-content>
+    <div *ngFor="let forumGroup of forumGroups">
+      <div *ngIf="currentForumGroup == forumGroup.id">
+        <ion-grid>
+          <ion-row>
+            <ion-col width="100">
+              {{ forumGroup.name }}
+            </ion-col>
+          </ion-row>
+        </ion-grid>
 
-        <ion-row>
-          <ion-col >
-            <button clear small ion-button >
-              <div>&nbsp;&nbsp;{{ forum.poster }}</div>
-            </button>
-          </ion-col>
-          <ion-col>
-            <button  outline small ion-button >
-              <ion-icon name="text"></ion-icon>
-              <div>&nbsp;&nbsp;{{forum.comments.length}} Comments</div>
-            </button>
-          </ion-col>
-        </ion-row>
+        <ion-card *ngIf="forumGroup.forums.length == 0">
+          <ion-card-content>
+            <p>Current there is no topic added on this category. Feel free to add new topic</p>
+          </ion-card-content>
+        </ion-card>
 
-      </ion-card>
+        <ion-card *ngFor="let forum of forumGroup.forums" (click)="goToForum(forum,forumGroup.name)">
+          <ion-card-content>
+            <p class="forumTitle"><b>{{ forum.title}}</b></p>
+            <p class="forumTitle">{{ forum.description}}</p>
+          </ion-card-content>
+
+          <ion-row>
+            <ion-col>
+              <button clear small ion-button>
+                <div>&nbsp;&nbsp;{{ forum.poster }}</div>
+              </button>
+            </ion-col>
+            <ion-col>
+              <button outline small ion-button>
+                <ion-icon name="text"></ion-icon>
+                <div>&nbsp;&nbsp;{{forum.numberOfComents}} Comments</div>
+              </button>
+            </ion-col>
+          </ion-row>
+
+        </ion-card>
+      </div>
     </div>
+
+    <ion-fab bottom right (click)="addNewTopic()">
+      <button ion-fab mini>
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-fab>
   </div>
 
 

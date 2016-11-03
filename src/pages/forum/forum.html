@@ -9,41 +9,59 @@
 
 <ion-content class="forum">
 
-  <ion-card>
-    <ion-card-content>
-      <h4><b>{{ forum.title}}</b></h4>
-      <p>Posted by: <span class="forumPoster">{{ forum.poster }} </span>  ( 09 : 24 ) </p>
-    </ion-card-content>
-  </ion-card>
+  <div *ngIf="loadingData">
+    <ion-list>
+      <ion-item *ngFor="let message of loadingMessages; let currentIndex = index">
+        {{ message }}
+        <ion-icon *ngIf="(currentIndex + 1) < loadingMessages.length" name="done-all" item-right></ion-icon>
+        <div style="text-align: center" item-right *ngIf="(currentIndex + 1) >= loadingMessages.length">
+          <ion-spinner name="crescent"></ion-spinner>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div *ngIf="!loadingData">
+    <ion-card>
+      <ion-card-content>
+        <h4><b>{{ forum.title}}</b></h4>
+        <p>Posted by: <span class="forumPoster">{{ forum.poster }} </span> on  {{ forum.postedDate }}  </p>
+      </ion-card-content>
+    </ion-card>
 
-  <ion-card class="commentsList">
-    <ion-card-content>
-      <div *ngFor="let forumComment of forum.comments">
-        <p class="commenter"><b>{{forumComment.commenter }}</b></p>
-        <p class="comment">{{forumComment.comment }}</p>
-        <hr>
-      </div>
-    </ion-card-content>
-  </ion-card>
 
-  <ion-grid >
-    <ion-row>
-      <ion-col width="100">
-        <ion-item>
-          <ion-label floating>Comment</ion-label>
-          <ion-textarea [(ngModel)]="comment">></ion-textarea>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col width="100">
-        <button ion-button icon-only full (click)="commentOnForum()">
-          Comment
-          <ion-icon name="send"></ion-icon>
-        </button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    <ion-card class="commentsList" *ngIf="forum">
+      <ion-card-content *ngIf="forum.comments">
 
+        <div *ngIf="forum.comments.length == 0">
+          <p>Current there is no comment on this topic. Feel free to comment</p>
+        </div>
+
+        <div *ngFor="let forumComment of forum.comments">
+          <p class="commenter"><b>{{forumComment.commenter }}</b></p>
+          <p class="comment">{{forumComment.comment }}</p>
+          <hr>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-grid >
+      <ion-row>
+        <ion-col width="100">
+          <ion-item>
+            <ion-label floating>Comment</ion-label>
+            <ion-textarea [(ngModel)]="comment">></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col width="100">
+          <button ion-button icon-only full (click)="commentOnForum()">
+            Comment
+            <ion-icon name="send"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 
 </ion-content>

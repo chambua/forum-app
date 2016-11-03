@@ -23,12 +23,15 @@ export class Home {
 
   public forumGroups : any = [];
   public currentForumGroup : string;
+  public loadingData:boolean;
+  public loadingMessages:any = [];
 
 
   constructor(private categoryEntity:CategoryEntity,private user : User,private httpClient : HttpClient,private navCtrl: NavController,private toastCtrl: ToastController) {
+    this.loadingData = false;
     this.user.getCurrentUser().then((user : any)=>{
       this.currentUser = user;
-      this.getForumGroups();
+      this.loadingData = false;
       this.getCategoryEntities();
     });
 
@@ -39,100 +42,54 @@ export class Home {
   }
 
   getCategoryEntities(){
+    this.loadingData = true;
+    this.loadingMessages = [];
+    this.setLoadingMessages('Loading topics on subscribed categories');
     var categoryIds = [];
     this.currentUser.categories.forEach((category:any)=>{
       categoryIds.push(category.cat_id);
     });
     this.categoryEntity.getCategoryEntitiesByCategoryIds(categoryIds).then((categoryEntities : any)=>{
-      alert("Success : " + JSON.stringify(categoryEntities));
+      this.forumGroups = [];
+      this.currentUser.categories.forEach((category:any)=>{
+        this.forumGroups.push(
+          {
+            id : category.cat_id,
+            name : category.cat_name,
+            forums : categoryEntities[category.cat_id]?categoryEntities[category.cat_id] : []
+          }
+        )
+      });
+      this.loadingData = false;
+      this.showSegment(this.forumGroups[0].id);
     },error=>{
-      alert('error : ' + JSON.stringify(error));
+      this.loadingData = false;
+      this.setToasterMessage("Fail to load topics on subscribed categories");
     });
   }
-
-  getForumGroups(){
-
-    let forum = [
-      {
-        id : "form_1",
-        title : "BUSINESS HAS TAKE NEW TURN IN THIRD WORLD COUNTRY?",
-        poster : 'Chambua',
-        comments : [
-          {
-            comment : "It is just minor connection",
-            commenter : "Joseph"
-          },
-          {
-            comment : "Ofcoz this hii imekuwa ni topic kubwa sasa east africa……",
-            commenter : "Leah"
-          },
-          {
-            comment : "It is just minor connection",
-            commenter : "Ester"
-          },
-          {
-            comment : "It is done",
-            commenter : "Joseph"
-          }
-        ]
-      },
-      {
-        id : "form_2",
-        title : "GOVERNMENT OF TANZANIA HAS BEEN ABLE TO MANAGE TO STABILIZE NATIONAL CURRENCY?",
-        poster : 'Rosemary',
-        comments : [
-          {
-            comment : "It is just minor connection",
-            commenter : "Joseph"
-          },
-          {
-            comment : "Nenda kasome makala iliyotolewa na BBC leo utapata majibu……..",
-            commenter : "Joseph"
-          }
-        ]
-      },
-      {
-        id : "form_3",
-        title : "What is deflation and inflation affect African continent.. I need comment please",
-        poster : 'Chingalo',
-        comments : [
-          {
-            comment : "It is just minor connection",
-            commenter : "Joseph"
-          },
-          {
-            comment : "It is done",
-            commenter : "Joseph"
-          }
-        ]
-      }
-    ];
-    this.forumGroups = [];
-    this.currentUser.categories.forEach((category:any)=>{
-      this.forumGroups.push(
-        {
-          id : category.cat_id,
-          name : category.cat_name,
-          forums : forum
-        }
-      )
-    });
-
-    this.showSegment(this.forumGroups[0].id);
-  }
-
 
   goToForum(forum,forumGroupName){
     let parameter = {
       forumGroupName : forumGroupName,
-      forum : forum
+      forumPoster : forum.poster,
+      forumTitle : forum.title,
+      forumPostedDate : forum.posted_date,
+      forumId : forum.id
     };
     this.navCtrl.push(Forum,parameter);
   }
+
+  addNewTopic(){
+    this.setToasterMessage('Adding new topic coming soon');
+  }
+
   showSegment(currentGroupId){
     this.currentForumGroup = ""+currentGroupId;
   }
 
+  setLoadingMessages(message) {
+    this.loadingMessages.push(message);
+  }
 
   setToasterMessage(message){
     let toast = this.toastCtrl.create({

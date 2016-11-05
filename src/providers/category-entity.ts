@@ -16,19 +16,15 @@ export class CategoryEntity {
 
   }
 
-  //@todo add url for server
   saveCategoryEntity(data){
-    ////cat_id user_id title description
-    let url = "save-category-entity";
+    let url = "/save-category-entity";
     let self = this;
     return new Promise(function(resolve, reject) {
-      return new Promise(function(resolve, reject) {
-        self.httpClient.post(url,data).subscribe(response=>{
-          resolve(response.json());
-        },error=>{
-          reject();
-        });
-      })
+      self.httpClient.post(url,data).subscribe(response=>{
+        resolve(response.json());
+      },error=>{
+        reject();
+      });
     });
   }
 

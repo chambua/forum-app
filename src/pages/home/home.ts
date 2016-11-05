@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController,ToastController } from 'ionic-angular';
+import { NavController,ToastController,AlertController } from 'ionic-angular';
 
 import {Forum} from '../forum/forum';
 import {User} from "../../providers/user";
@@ -27,8 +27,9 @@ export class Home {
   public loadingMessages:any = [];
 
 
-  constructor(private categoryEntity:CategoryEntity,private user : User,private httpClient : HttpClient,private navCtrl: NavController,private toastCtrl: ToastController) {
+  constructor(private alertCtrl: AlertController,private categoryEntity:CategoryEntity,private user : User,private httpClient : HttpClient,private navCtrl: NavController,private toastCtrl: ToastController) {
     this.loadingData = false;
+    this.currentForumGroup = "";
     this.user.getCurrentUser().then((user : any)=>{
       this.currentUser = user;
       this.loadingData = false;
@@ -38,12 +39,11 @@ export class Home {
   }
 
   ionViewDidLoad() {
-    //console.log('Hello Home Page');
+    this.loadingMessages = [];
   }
 
   getCategoryEntities(){
     this.loadingData = true;
-    this.loadingMessages = [];
     this.setLoadingMessages('Loading topics on subscribed categories');
     var categoryIds = [];
     this.currentUser.categories.forEach((category:any)=>{
@@ -61,7 +61,9 @@ export class Home {
         )
       });
       this.loadingData = false;
-      this.showSegment(this.forumGroups[0].id);
+      if(this.currentForumGroup ==""){
+        this.showSegment(this.forumGroups[0].id);
+      }
     },error=>{
       this.loadingData = false;
       this.setToasterMessage("Fail to load topics on subscribed categories");
@@ -80,8 +82,59 @@ export class Home {
   }
 
   addNewTopic(){
-    this.setToasterMessage('Adding new topic coming soon');
+    let alert = this.alertCtrl.create({
+      title: 'New topic',
+      inputs: [
+        {
+          name: 'title',
+          placeholder: 'Topic Title'
+        },
+        {
+          name: 'description',
+          placeholder: 'Topic Description'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+          }
+        },
+        {
+          text: 'Add',
+          handler: data => {
+            if (data.title && data.description) {
+              this.saveNewTopic(data);
+            } else {
+              this.setToasterMessage('Please enter title and description');
+              return false;
+            }
+          }
+        }
+      ]
+    });
+    alert.present();
   }
+
+
+  saveNewTopic(data) {
+    let postData = {
+      cat_id : this.currentForumGroup,
+      user_id : this.currentUser.user_id,
+      title : data.title,
+      description : data.description
+    };
+    this.loadingData = true;
+    this.loadingMessages = [];
+    this.setLoadingMessages('Please wait, while saving new topic');
+    this.categoryEntity.saveCategoryEntity(postData).then(()=>{
+      this.getCategoryEntities();
+    },error=>{
+      this.loadingData = false;
+    });
+  }
+
 
   showSegment(currentGroupId){
     this.currentForumGroup = ""+currentGroupId;

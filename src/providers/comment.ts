@@ -16,32 +16,28 @@ export class Comment {
   }
 
   //@todo add url for server
-  getAllComents(categoryEntityId){
-    let url = "" + "/"+categoryEntityId;
+  getAllComments(categoryEntityId){
+    let url = "/get-comments" + "/"+categoryEntityId;
     let self = this;
     return new Promise(function(resolve, reject) {
-      return new Promise(function(resolve, reject) {
-        self.httpClient.get(url).subscribe(response=>{
-          resolve(response.json());
-        },error=>{
-          reject();
-        });
-      })
-    });
+      self.httpClient.get(url).subscribe(response=>{
+        resolve(response.json());
+      },error=>{
+        reject();
+      });
+    })
   }
 
   saveComment(data){
-    let url = "";
+    let url = "/save-comment";
     let self = this;
     return new Promise(function(resolve, reject) {
-      return new Promise(function(resolve, reject) {
-        self.httpClient.post(url,data).subscribe(response=>{
-          resolve(response.json());
-        },error=>{
-          reject();
-        });
-      })
-    });
+      self.httpClient.post(url,data).subscribe(response=>{
+        resolve(response.json());
+      },error=>{
+        reject();
+      });
+    })
   }
 
 }

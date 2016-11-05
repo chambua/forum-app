@@ -36,15 +36,24 @@
           <p>Current there is no comment on this topic. Feel free to comment</p>
         </div>
 
-        <div *ngFor="let forumComment of forum.comments">
-          <p class="commenter"><b>{{forumComment.commenter }}</b></p>
-          <p class="comment">{{forumComment.comment }}</p>
+        <div *ngFor="let comment of forum.comments">
+          <p class="commenter"><b>{{comment.username }}</b></p>
+          <p class="comment">{{comment.description }}</p>
           <hr>
         </div>
       </ion-card-content>
     </ion-card>
 
+    <ion-card class="commentsList" *ngIf="isAppSendingComment">
+      <ion-card-content >
+        <ion-spinner name="circles"></ion-spinner>  Please wait, while sending comment
+      </ion-card-content>
+    </ion-card>
+
     <ion-grid >
+
+
+
       <ion-row>
         <ion-col width="100">
           <ion-item>

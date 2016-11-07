@@ -10,6 +10,7 @@ import {Forum} from "../pages/forum/forum";
 import {SignUp} from "../pages/sign-up/sign-up";
 import {Doctor} from "../pages/doctor/doctor";
 import {Councelling} from "../pages/councelling/councelling";
+import {Adverts} from "../pages/adverts/adverts"
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import {Councelling} from "../pages/councelling/councelling";
     Home,Councelling,
     ContactAdmin,Doctor,
     Account,
-    Forum,
+    Forum,Adverts,
     SignUp
   ],
   imports: [
@@ -31,7 +32,7 @@ import {Councelling} from "../pages/councelling/councelling";
     Home,Councelling,
     ContactAdmin,Doctor,
     Account,
-    Forum,
+    Forum,Adverts,
     SignUp
   ],
   providers: [Storage]

@@ -9,6 +9,7 @@ import { Account } from "../pages/account/account";
 import {User} from "../providers/user";
 import {Doctor} from "../pages/doctor/doctor";
 import {Councelling} from "../pages/councelling/councelling";
+import {Adverts} from "../pages/adverts/adverts";
 
 
 @Component({
@@ -30,10 +31,11 @@ export class MyApp {
   generatePages(){
     this.pages = [
       { title: 'Home', component: Home,iconName :"home" },
-      { title: 'Contact Admin', component: ContactAdmin ,iconName :"call"},
+      { title: 'Adverts', component: Adverts, iconName :"book"},
       { title: 'Get Counselling', component: Councelling,iconName :"bulb" },
       { title: 'Get Doctor', component: Doctor,iconName :"contacts" },
-      { title: 'My Account', component: Account, iconName :"contact"}
+      { title: 'My Account', component: Account, iconName :"contact"},
+      { title: 'Contact Admin', component: ContactAdmin ,iconName :"call"}
     ];
   }
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+declare var window;
 /*
   Generated class for the ContactAdmin page.
 
@@ -19,14 +19,18 @@ export class ContactAdmin {
 
   setContacts(){
     this.contacts = [
-      {key : "Name",value : "Chambua"},
-      {key : "E-mail",value : "intelsoftafrica@info.co.tz"},
-      {key : "Mobile Number",value : "+255 717 873 646"}
+      //{key : "Name",value : "Chambua"},
+      {key : "E-mail",value : "sales@evc.co.tz"},
+      {key : "Mobile Number",value : "0225500135"}
     ];
   }
 
   ionViewDidLoad() {
     //console.log('Hello ContactAdmin Page');
+  }
+
+  callContact(number){
+    window.location = "tel:" +number;
   }
 
 }

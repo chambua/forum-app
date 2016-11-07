@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+declare var window;
 
 /*
   Generated class for the Doctor page.
@@ -24,16 +25,16 @@ export class Doctor {
 
   generateContacts(){
     this.contacts.push({
-      name : "Joel Joseph",
-      number : "+255 687 564 567"
+      name : "GEMA",
+      number : "+255755254758"
     });
     this.contacts.push({
-      name : "Josephine Joel",
-      number : "+255 787 564 567"
+      name : "MAMBO ",
+      number : "+255743549634"
     });
-    this.contacts.push({
-      name : "Charles Jacob",
-      number : "+255 587 564 567"
-    });
+  }
+
+  callContact(number){
+    window.location = "tel:" +number;
   }
 }

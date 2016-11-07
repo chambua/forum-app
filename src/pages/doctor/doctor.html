@@ -19,12 +19,10 @@
 <ion-content padding class="doctor">
   <ion-list>
     <div *ngFor="let contact of contacts">
-      <ion-item>
-        <ion-avatar item-left>
-          <img src="assets/img/logo.png">
-        </ion-avatar>
-        <h2> Dr. {{ contact.name }}</h2>
-        <p>{{ contact.number }}</p>
+      <ion-item  (click)="callContact(contact.number)">
+        <ion-icon name="contact" item-left></ion-icon>
+        Dr. {{ contact.name }}
+        <ion-icon name="call" item-right></ion-icon>
       </ion-item>
     </div>
   </ion-list>

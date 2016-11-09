@@ -75,6 +75,7 @@ export class Home {
       forumGroupName : forumGroupName,
       forumPoster : forum.poster,
       forumTitle : forum.title,
+      "forumDescription" : forum.description,
       forumPostedDate : forum.posted_date,
       forumId : forum.id
     };

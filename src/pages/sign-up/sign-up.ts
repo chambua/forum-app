@@ -20,7 +20,9 @@ export class SignUp {
 
   public loadingData: boolean;
   public loadingMessages : any = [];
-  public data:any = {};
+  public data:any = {
+    uni_id : ""
+  };
   public mandatoryFields : any;
   public selectedCategories : any;
   public categories : any;
@@ -52,13 +54,23 @@ export class SignUp {
   }
 
   getAllUniversities(){
-    this.setLoadingMessages('Fetching Universities details from the server');
+    this.setLoadingMessages('Fetching Universities from the server');
+    let url = "/get-universities";
+    this.httpClient.get(url).subscribe(response=>{
+      response = response.json();
+      this.allUniversities = response;
+      this.setDefaultUniversityId(response);
+    },error=>{
+      this.loadingData = false;
+      this.setToasterMessage("Fail to fetch Universities from server");
+    })
   }
 
   setDefaultUniversityId(universities){
     if(universities.length > 0){
       this.selectedUniversity = universities[0].uni_id;
     }
+    this.loadingData = false;
   }
 
   ionViewDidLoad() {
@@ -70,6 +82,7 @@ export class SignUp {
       let url = "/register";
       this.loadingData = true;
       this.loadingMessages = [];
+      this.data.uni_id = this.selectedUniversity
       this.setLoadingMessages('Register account');
       this.httpClient.post(url,this.data).subscribe((response)=>{
         response = response.json();

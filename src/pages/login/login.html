@@ -10,7 +10,7 @@
 
     <ion-row>
       <ion-col class="topSLogan" width-100 >
-        <img [src]="data.logoUrl" width = "40%">
+        <img [src]="data.logoUrl" width = "60%">
         <h4 >{{ data.setUpTitle }}</h4>
         <p>{{ data.setUpShortDescription }}</p>
       </ion-col>
@@ -21,11 +21,6 @@
       <ion-col width-100 style="background-color:#ffffff;">
 
         <ion-list *ngIf="!loadingData" >
-
-          <!--<ion-item>-->
-            <!--<ion-label floating>Server URL</ion-label>-->
-            <!--<ion-input [(ngModel)]="data.serverUrl" type="url" ></ion-input>-->
-          <!--</ion-item>-->
 
           <ion-item>
             <ion-label floating>Username</ion-label>

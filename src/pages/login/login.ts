@@ -28,7 +28,7 @@ export class Login {
   constructor(private categories : Categories,private navCtrl:NavController, private toastCtrl:ToastController, private user:User,private httpClient : HttpClient) {
     this.loadingData = false;
     this.data.setUpTitle = "University Intellectual Network";
-    this.data.logoUrl = "assets/img/logo.png";
+    this.data.logoUrl = "assets/img/app-log.png";
     this.data.setUpShortDescription = "Easiest way to get help";
     this.mandatoryFields = [
       {name: "username", key: "username"},

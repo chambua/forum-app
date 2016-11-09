@@ -85,7 +85,7 @@ export class Forum {
         this.forum.comments.push({
           comment_id : "",
           description : comment,
-          username : this.currentUser.username,
+          full_name : this.currentUser.last_name,
           posted_date : new Date().toJSON().slice(0,10)
         });
         this.isAppSendingComment = false;

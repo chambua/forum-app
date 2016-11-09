@@ -48,6 +48,7 @@ export class Forum {
     this.forum = {};
     this.forum["id"]= this.params.get('forumId');
     this.forum["title"]=this.params.get('forumTitle');
+    this.forum["description"] = this.params.get('forumDescription');
     this.forum["poster"] = this.params.get('forumPoster');
     this.forum["postedDate"] = this.params.get('forumPostedDate');
     this.comment = "";

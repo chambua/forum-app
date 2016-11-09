@@ -24,7 +24,21 @@
     <ion-card>
       <ion-card-content>
         <h4><b>{{ forum.title}}</b></h4>
-        <p>Posted by: <span class="forumPoster">{{ forum.poster }} </span> on  {{ forum.postedDate }}  </p>
+        <p> {{ forum.description }}</p>
+        <ion-row>
+          <ion-col>
+            <ion-col>
+              <ion-note text-left>
+                <span class="forumPoster" >Posted by: {{ forum.poster }}</span>
+              </ion-note>
+            </ion-col>
+          </ion-col>
+          <ion-col center text-center >
+            <ion-note>
+              {{ forum.postedDate }}
+            </ion-note>
+          </ion-col>
+        </ion-row>
       </ion-card-content>
     </ion-card>
 
@@ -37,10 +51,22 @@
         </div>
 
         <div *ngFor="let comment of forum.comments">
-          <p class="commenter"><b>{{comment.username }}</b></p>
+          <ion-row>
+            <ion-col>
+              <ion-note text-left>
+                <span class="forumPoster" >{{comment.username }}</span>
+              </ion-note>
+            </ion-col>
+            <ion-col center text-right >
+              <ion-note>
+                {{ comment.posted_date}}
+              </ion-note>
+            </ion-col>
+          </ion-row>
           <p class="comment">{{comment.description }}</p>
           <hr>
         </div>
+
       </ion-card-content>
     </ion-card>
 

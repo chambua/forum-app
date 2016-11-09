@@ -39,6 +39,15 @@
       <ion-col width-100 style="background-color:#ffffff;">
 
         <ion-item>
+          <ion-label>University</ion-label>
+          <ion-select [(ngModel)]="selectedUniversity">
+            <div *ngFor="let university of allUniversities">
+              <ion-option value="{{university.uni_id}}">{{ university.uni_name }}</ion-option>
+            </div>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
           <ion-label floating>Full Name</ion-label>
           <ion-input [(ngModel)]="data.fullName" type="text" ></ion-input>
         </ion-item>

@@ -24,6 +24,8 @@ export class SignUp {
   public mandatoryFields : any;
   public selectedCategories : any;
   public categories : any;
+  public selectedUniversity : any;
+  public allUniversities : any;
 
   constructor(private Categories : Categories,public navCtrl:NavController,private toastCtrl: ToastController,private user : User,private httpClient:HttpClient) {
     this.loadingData = false;
@@ -42,11 +44,21 @@ export class SignUp {
     this.setLoadingMessages('Fetching categories from the server');
     this.Categories.getAllCategories().then((categories : any)=>{
       this.categories = categories;
-      this.loadingData = false;
+      this.getAllUniversities();
     },error=>{
       this.loadingData = false;
       this.setToasterMessage("Fail to get categories from server");
     });
+  }
+
+  getAllUniversities(){
+    this.setLoadingMessages('Fetching Universities details from the server');
+  }
+
+  setDefaultUniversityId(universities){
+    if(universities.length > 0){
+      this.selectedUniversity = universities[0].uni_id;
+    }
   }
 
   ionViewDidLoad() {

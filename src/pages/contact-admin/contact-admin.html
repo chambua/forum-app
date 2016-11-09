@@ -17,13 +17,19 @@
 
 <ion-content class="contact-admin">
   <ion-card>
-    <img src="assets/img/logo.png"/>
+    <img src="assets/img/app-log.png"/>
     <ion-card-content>
       <div *ngFor="let contact of contacts">
         <h2>
           {{ contact.key }}
         </h2>
-        <p>{{ contact.value }}</p>
+        <p *ngIf=" contact.key!='Mobile Number'">{{ contact.value }}</p>
+        <div *ngIf=" contact.key =='Mobile Number'">
+          <ion-item  (click)="callContact(contact.value)">
+            {{ contact.value }}
+            <ion-icon name="call" item-right></ion-icon>
+          </ion-item>
+        </div>
       </div>
 
     </ion-card-content>

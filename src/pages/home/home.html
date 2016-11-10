@@ -55,12 +55,12 @@
           </ion-card-content>
 
           <ion-row>
-            <ion-col>
+            <ion-col text-left>
               <button clear small ion-button>
                 <div>&nbsp;&nbsp;{{ forum.poster }}</div>
               </button>
             </ion-col>
-            <ion-col>
+            <ion-col text-right>
               <button  small ion-button>
                 <ion-icon name="text"></ion-icon>
                 <div>&nbsp;&nbsp;{{forum.numberOfComents}} Comments</div>
@@ -72,13 +72,12 @@
       </div>
     </div>
 
-    <ion-fab bottom right (click)="addNewTopic()">
-      <button ion-fab mini>
-        <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-fab>
   </div>
-
-
-
+  <ion-fab bottom right (click)="addNewTopic()" *ngIf="!loadingData">
+    <button ion-fab mini>
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>
+
+

@@ -11,6 +11,7 @@ import {SignUp} from "../pages/sign-up/sign-up";
 import {Doctor} from "../pages/doctor/doctor";
 import {Councelling} from "../pages/councelling/councelling";
 import {Adverts} from "../pages/adverts/adverts"
+import {ForgetPassword} from "../pages/forget-password/forget-password";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import {Adverts} from "../pages/adverts/adverts"
     ContactAdmin,Doctor,
     Account,
     Forum,Adverts,
-    SignUp
+    SignUp,ForgetPassword
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -33,7 +34,7 @@ import {Adverts} from "../pages/adverts/adverts"
     ContactAdmin,Doctor,
     Account,
     Forum,Adverts,
-    SignUp
+    SignUp,ForgetPassword
   ],
   providers: [Storage]
 })

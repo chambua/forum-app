@@ -10,15 +10,18 @@
 <ion-content class="forum">
 
   <div *ngIf="loadingData">
-    <ion-list>
-      <ion-item *ngFor="let message of loadingMessages; let currentIndex = index">
-        {{ message }}
-        <ion-icon *ngIf="(currentIndex + 1) < loadingMessages.length" name="done-all" item-right></ion-icon>
-        <div style="text-align: center" item-right *ngIf="(currentIndex + 1) >= loadingMessages.length">
-          <ion-spinner name="crescent"></ion-spinner>
-        </div>
-      </ion-item>
-    </ion-list>
+    <div style="text-align: center;margin: 2%;padding: 2%;">
+      <ion-spinner name="circles" color="primary"></ion-spinner>
+    </div>
+    <!--<ion-list>-->
+      <!--<ion-item *ngFor="let message of loadingMessages; let currentIndex = index">-->
+        <!--{{ message }}-->
+        <!--<ion-icon *ngIf="(currentIndex + 1) < loadingMessages.length" name="done-all" item-right></ion-icon>-->
+        <!--<div style="text-align: center" item-right *ngIf="(currentIndex + 1) >= loadingMessages.length">-->
+          <!--<ion-spinner name="crescent"></ion-spinner>-->
+        <!--</div>-->
+      <!--</ion-item>-->
+    <!--</ion-list>-->
   </div>
   <div *ngIf="!loadingData">
     <ion-card>
@@ -78,13 +81,11 @@
 
     <ion-grid >
 
-
-
       <ion-row>
         <ion-col width="100">
           <ion-item>
             <ion-label floating>Comment</ion-label>
-            <ion-textarea [(ngModel)]="comment">></ion-textarea>
+            <ion-textarea [(ngModel)]="comment"></ion-textarea>
           </ion-item>
         </ion-col>
       </ion-row>

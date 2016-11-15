@@ -5,6 +5,7 @@ import {User} from "../../providers/user";
 import {SignUp} from "../sign-up/sign-up";
 import {HttpClient} from "../../providers/http-client";
 import {Categories} from "../../providers/categories";
+import {ForgetPassword} from "../forget-password/forget-password";
 
 /*
  Generated class for the Login page.
@@ -112,7 +113,7 @@ export class Login {
   }
 
   forgetPassword() {
-    this.setToasterMessage('forget password coming soon');
+    this.navCtrl.push(ForgetPassword);
   }
 
   setLoadingMessages(message) {

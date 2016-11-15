@@ -25,11 +25,11 @@ export class Councelling {
 
   generateContacts(){
     this.contacts.push({
-      name : "GEMA",
+      name : "Gema simbee",
       number : "+255755254758"
     });
     this.contacts.push({
-      name : "MAMBO ",
+      name : "Joseph Mambo",
       number : "+255743549634"
     });
   }

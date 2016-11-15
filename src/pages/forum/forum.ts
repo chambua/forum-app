@@ -40,7 +40,6 @@ export class Forum {
   }
 
   getForumData(){
-    //@todo loading comments from server
     this.loadingData = true;
     this.loadingMessages = [];
     this.setLoadingMessages('Set up topic information');
@@ -54,7 +53,6 @@ export class Forum {
     this.comment = "";
     this.forum["comments"] = [];
     this.loadingComments(this.forum["id"]);
-
   }
 
   loadingComments(categoryEntityId){
@@ -71,8 +69,6 @@ export class Forum {
   }
 
   commentOnForum(){
-
-    //saving comments to the  server
     let comment = this.comment.trim();
     if(comment){
       this.isAppSendingComment = true;
@@ -93,12 +89,9 @@ export class Forum {
         this.isAppSendingComment = false;
         this.setToasterMessage("Fail to save comment");
       });
-
     }
     this.comment = "";
   }
-
-
 
   setLoadingMessages(message) {
     this.loadingMessages.push(message);

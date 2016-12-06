@@ -12,6 +12,8 @@ import {Doctor} from "../pages/doctor/doctor";
 import {Councelling} from "../pages/councelling/councelling";
 import {Adverts} from "../pages/adverts/adverts"
 import {ForgetPassword} from "../pages/forget-password/forget-password";
+import {ResetPassword} from "../pages/reset-password/reset-password";
+import {HttpClient} from "../providers/http-client";
 
 @NgModule({
   declarations: [
@@ -20,7 +22,7 @@ import {ForgetPassword} from "../pages/forget-password/forget-password";
     Home,Councelling,
     ContactAdmin,Doctor,
     Account,
-    Forum,Adverts,
+    Forum,Adverts,ResetPassword,
     SignUp,ForgetPassword
   ],
   imports: [
@@ -33,9 +35,9 @@ import {ForgetPassword} from "../pages/forget-password/forget-password";
     Home,Councelling,
     ContactAdmin,Doctor,
     Account,
-    Forum,Adverts,
+    Forum,Adverts,ResetPassword,
     SignUp,ForgetPassword
   ],
-  providers: [Storage]
+  providers: [Storage,HttpClient]
 })
 export class AppModule {}

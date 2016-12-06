@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController ,ToastController} from 'ionic-angular';
+import {User} from "../../providers/user";
+import {ResetPassword} from "../reset-password/reset-password";
 /*
   Generated class for the ForgetPassword page.
 
@@ -16,7 +18,7 @@ export class ForgetPassword {
   public loadingData:boolean;
   public loadingMessages:any = [];
 
-  constructor(private toastCtrl: ToastController,private navCtrl : NavController) {
+  constructor(private toastCtrl: ToastController,private navCtrl : NavController,private user : User) {
     this.data = {};
   }
 
@@ -26,9 +28,11 @@ export class ForgetPassword {
   verifyCode(){
     if(this.data.email){
       if(this.data.code){
-        //decode code :: atob
         if(btoa(this.data.email) == this.data.code){
-          alert('yes it is ready to update password');
+          let parameter = {
+            email : this.data.email
+          };
+          this.navCtrl.push(ResetPassword,parameter);
         }else{
           this.setToasterMessage('You have entered incorrect code, please press send code button');
         }
@@ -42,7 +46,6 @@ export class ForgetPassword {
 
   resendVerificationCode(){
     if(this.data.email){
-      //encode
       this.data.code = btoa(this.data.email);
       this.sendEmail();
     }else{
@@ -55,7 +58,16 @@ export class ForgetPassword {
       email : this.data.email,
       code : this.data.code
     };
-    alert(JSON.stringify(data));
+    this.user.sendChangePasswordVerificationCode(data).then((response:any)=>{
+      if(response.status == 200|| response.status == "200"){
+        this.setToasterMessage('Verification code has been sent to your email');
+        this.navCtrl.pop();
+      }else{
+        this.setToasterMessage('Fail to send verification code, please try again later');
+      }
+    },error=>{
+      this.setToasterMessage('Fail to send verification code, please try again later');
+    });
   };
 
   setLoadingMessages(message) {

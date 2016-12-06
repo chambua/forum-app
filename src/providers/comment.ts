@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '../providers/http-client';
-
 import {Observable} from 'rxjs/Rx';
 
 /*
